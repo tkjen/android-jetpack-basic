@@ -2,36 +2,28 @@ package com.tkjen.basic_android_kotlin.room
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tkjen.basic_android_kotlin.databinding.ItemUserBinding
 
-class UserAdapter(
-    private var users: List<User> = listOf(),private val onItemClick: (User) -> Unit
-) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
-
+class UserListAdapter(private val onDeleteClick: (User) -> Unit) :
+    ListAdapter<User, UserListAdapter.UserViewHolder>(UserDiffCallback){
     inner class UserViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User) {
             binding.textViewName.text = "${user.firstName} ${user.lastName}"
             binding.textViewAge.text = "Age: ${user.age}"
             binding.btnDelete.setOnClickListener {
-                onItemClick(user)
+                onDeleteClick(user)
             }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return UserViewHolder(binding)
     }
 
-    override fun getItemCount() = users.size
-
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.bind(users[position])
+        holder.bind(getItem(position))
     }
 
-    fun setData(newUsers: List<User>) {
-        users = newUsers
-        notifyDataSetChanged()
-    }
 }
