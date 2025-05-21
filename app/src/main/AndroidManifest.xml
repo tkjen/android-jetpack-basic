@@ -37,6 +37,9 @@
             android:name=".permissions.PermissionActivity"
             android:exported="true"/>
         <activity
+            android:name=".flow.FlowActivity"
+            android:exported="true"/>
+        <activity
             android:name=".work.UploadActivity"
             android:exported="true"/>
         <activity
