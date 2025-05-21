@@ -12,6 +12,7 @@ class UserListAdapter(private val onDeleteClick: (User) -> Unit) :
         fun bind(user: User) {
             binding.textViewName.text = "${user.firstName} ${user.lastName}"
             binding.textViewAge.text = "Age: ${user.age}"
+
             binding.btnDelete.setOnClickListener {
                 onDeleteClick(user)
             }

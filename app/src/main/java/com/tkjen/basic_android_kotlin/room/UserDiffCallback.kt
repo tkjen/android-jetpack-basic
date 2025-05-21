@@ -14,4 +14,5 @@ object UserDiffCallback : DiffUtil.ItemCallback<User>() {
     override fun getChangePayload(oldItem: User, newItem: User): Any? {
         return super.getChangePayload(oldItem, newItem)
     }
+
 }
